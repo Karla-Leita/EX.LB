@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Examen en Línea</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Examen en Línea</h1>
+        <div id="login-form">
+            <h2>Iniciar Sesión</h2>
+            <input type="email" id="email" placeholder="Correo electrónico" required><br>
+            <input type="password" id="password" placeholder="Contraseña" required><br>
+            <button id="login-btn">Iniciar Sesión</button>
+            <button id="signup-btn">Registrarse</button>
+        </div>
+        <div id="exam-form" style="display:none;">
+            <h2>Examen</h2>
+            <form id="examForm">
+                <div class="question">
+                    <label>1. ¿Cuál es la capital de Francia?</label><br>
+                    <input type="radio" name="q1" value="Berlín"> Berlín<br>
+                    <input type="radio" name="q1" value="Madrid"> Madrid<br>
+                    <input type="radio" name="q1" value="París"> París<br>
+                </div>
+                <button type="submit">Enviar Respuestas</button>
+            </form>
+        </div>
+        <div id="result" style="display:none;"></div>
+    </div>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
