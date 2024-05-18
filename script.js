@@ -1,24 +1,14 @@
-// Configuración de Firebase
-const firebaseConfig = {
-    apiKey: "TU_API_KEY",
-    authDomain: "TU_PROYECTO.firebaseapp.com",
-    projectId: "TU_PROYECTO",
-    storageBucket: "TU_PROYECTO.appspot.com",
-    messagingSenderId: "TU_MESSAGING_SENDER_ID",
-    appId: "TU_APP_ID"
+// Configuración de usuario de muestra
+const sampleUser = {
+    email: "admin",
+    password: "1234"
 };
-
-// Inicializar Firebase
-firebase.initializeApp(firebaseConfig);
-const auth = firebase.auth();
-const db = firebase.firestore();
 
 // Elementos del DOM
 const loginForm = document.getElementById('login-form');
 const examForm = document.getElementById('exam-form');
 const resultDiv = document.getElementById('result');
 const loginBtn = document.getElementById('login-btn');
-const signupBtn = document.getElementById('signup-btn');
 const emailInput = document.getElementById('email');
 const passwordInput = document.getElementById('password');
 
@@ -26,43 +16,29 @@ const passwordInput = document.getElementById('password');
 loginBtn.addEventListener('click', () => {
     const email = emailInput.value;
     const password = passwordInput.value;
-    auth.signInWithEmailAndPassword(email, password)
-        .then(() => {
-            loginForm.style.display = 'none';
-            examForm.style.display = 'block';
-        })
-        .catch(error => {
-            alert(error.message);
-        });
-});
 
-// Registrarse
-signupBtn.addEventListener('click', () => {
-    const email = emailInput.value;
-    const password = passwordInput.value;
-    auth.createUserWithEmailAndPassword(email, password)
-        .then(() => {
-            loginForm.style.display = 'none';
-            examForm.style.display = 'block';
-        })
-        .catch(error => {
-            alert(error.message);
-        });
+    if (email === sampleUser.email && password === sampleUser.password) {
+        loginForm.style.display = 'none';
+        examForm.style.display = 'block';
+    } else {
+        alert('Correo electrónico o contraseña incorrectos');
+    }
 });
 
 // Enviar respuestas del examen
 examForm.addEventListener('submit', (e) => {
     e.preventDefault();
-    const user = auth.currentUser;
-    const q1 = document.querySelector('input[name="q1"]:checked').value;
 
-    db.collection('exams').add({
-        uid: user.uid,
-        q1: q1,
-        timestamp: firebase.firestore.FieldValue.serverTimestamp()
-    }).then(() => {
+    // Simulamos el envío de respuestas (aquí podrías guardar las respuestas en una base de datos)
+    const q1 = document.querySelector('input[name="q1"]:checked')?.value;
+    const q2 = document.querySelector('input[name="q2"]:checked')?.value;
+    const q3 = document.querySelector('input[name="q3"]:checked')?.value;
+    const q4 = document.querySelector('input[name="q4"]:checked')?.value;
+    const q5 = document.querySelector('input[name="q5"]:checked')?.value;
+
+    if (q1 && q2 && q3 && q4 && q5) {
         alert('Respuestas enviadas');
-    }).catch(error => {
-        console.error('Error al enviar respuestas: ', error);
-    });
+    } else {
+        alert('Por favor, responde todas las preguntas');
+    }
 });
